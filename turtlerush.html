@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+
+        <!-- Required Bootstrap meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+        <!-- Bootstrap JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+        <!-- CSS -->
+        <link href="styles.css" rel="stylesheet">
+
+        <title>Turtle</title>
+        <script>
+        // Counts turns
+        var turn = 1;
+        // Array of the current state of the board (x means nothing, t means turtle, p means plastic)
+        var board = ["x","x","x","x","x","x","x","x","x"];
+        // function that responds to clicking a box
+        function myfunction(event)
+        {
+        // Variables for using later
+          var img = document.createElement("img");
+          let who = "x";
+          let which = 0;
+
+          //Checks each event and gives it the number that it is represented with in the array
+          if (event == "topleft")
+          {
+            which = 0;
+          }
+          if (event == "top")
+          {
+            which = 1;
+          }
+          if (event == "topright")
+          {
+            which = 2;
+          }
+          if (event == "midleft")
+          {
+            which = 3;
+          }
+          if (event == "mid")
+          {
+            which = 4;
+          }
+          if (event == "midright")
+          {
+            which = 5;
+          }
+          if (event == "botleft")
+          {
+            which = 6;
+          }
+          if (event == "bot")
+          {
+            which = 7;
+          }
+          if (event == "botright")
+          {
+            which = 8;
+          }
+          // If there is nothing in that board spot
+          if (board[which] == "x")
+          {
+            // if turtle turn
+            if (turn % 2 == 1)
+            {
+              // Defines the image width, height and source
+              img.style.width = "120px";
+              img.style.height = "90px";
+              img.src = "media/turtle.jpg";
+
+              //Updates the board array
+              board[which] = "t";
+
+              //Adds the photo to the right box
+              document.getElementById(event).appendChild(img);
+              turn += 1;
+            }
+            //Same thing before but plastic
+            else if (turn % 2 == 0)
+            {
+              img.style.width = "120px";
+              img.style.height = "90px";
+              img.src = "media/plastic.jpg";
+              board[which] = "p";
+              document.getElementById(event).appendChild(img);
+              turn += 1;
+            }
+          }
+          // For checking winners (each position is hard coded kinda but I couldn't think of a better way)
+          let whoarray = ["t", "p"];
+          let whofull = "f";
+          for (let step = 0; step < 2; step++){
+            who = whoarray[step];
+            if (who == "p")
+            {
+              whofull = "Plastic has won!";
+            }
+            if (who == "t")
+            {
+              whofull = "Turtle has won!";
+            }
+            if(board[0] == who && board[1] == who && board[2] == who)
+            {
+              alert(whofull);
+            }
+            if(board[3] == who && board[4] == who && board[5] == who)
+            {
+              alert(whofull);
+            }
+            if(board[6] == who && board[7] == who && board[8] == who)
+            {
+              alert(whofull);
+            }
+            if(board[0] == who && board[3] == who && board[6] == who)
+            {
+              alert(whofull);
+            }
+            if(board[1] == who && board[4] == who && board[7] == who)
+            {
+              alert(whofull);
+            }
+            if(board[2] == who && board[5] == who && board[8] == who)
+            {
+              alert(whofull);
+            }
+            if(board[0] == who && board[4] == who && board[8] == who)
+            {
+              alert(whofull);
+            }
+            if(board[2] == who && board[4] == who && board[6] == who)
+            {
+              alert(whofull);
+            }
+          }
+        }
+
+
+        </script>
+    </head>
+    <body>
+      <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
+          <a class="navbar-brand" href="#">Turtles!</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="turtles.html">Types of Turtles</a>
+
+              <li class="nav-item active">
+                <a class="nav-link" href="plastic.html">Plastics</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="turtlerush.html">Plastic Tac Turtoe</a>
+              </li>
+                </ul>
+
+  </div>
+</nav>
+<!-- Video Background -->
+<div class="video-container">
+        <video playsinline autoplay muted loop id="rushbackground">
+          <source src="media/seabackground.mp4" type="video/mp4">
+        </video>
+      </div>
+<!-- The boxes -->
+<h1 style="color:white;padding: 10px;">Plastic Tac Turtoe!</h1>
+<p style="color:white;padding: 10px;">Standard Tic Tac Toe rules, refresh to restart the game.</p>
+<div class="container" style="text-align:center;">
+  <div class="row" style="height:120px;width:500px;">
+    <div class="col" onclick="myfunction(id)" style="border:1px solid white;" id="topleft"></div>
+    <div class="col" style="border:1px solid white;" onclick="myfunction(id)" id="top"></div>
+    <div class="col" style="border:1px solid white;" id="topright" onclick="myfunction(id)"></div>
+  </div>
+  <div class="row" style="height:120px;width:500px;">
+    <div class="col" style="border:1px solid white;" onclick="myfunction(id)" id="midleft"></div>
+    <div class="col" style="border:1px solid white;" onclick="myfunction(id)" id="mid"></div>
+    <div class="col" style="border:1px solid white;" onclick="myfunction(id)" id="midright"></div>
+  </div>
+  <div class="row" style="height:120px;width:500px;">
+    <div class="col" style="border:1px solid white;" onclick="myfunction(id)" id="botleft"></div>
+    <div class="col" style="border:1px solid white;" onclick="myfunction(id)" id="bot"></div>
+    <div class="col" style="border:1px solid white;" onclick="myfunction(id)" id="botright"></div>
+  </div>
+</div>
+    </body>
+
+
+
+</html>
